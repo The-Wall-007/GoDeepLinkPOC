@@ -4,8 +4,8 @@ const AppLinkHandler = () => {
   // URLs for your app links and app store links
   const androidAppLink = "https://play.google.com/store/games?hl=en"; // Custom scheme for Android app
   const iOSAppLink = "https://play.google.com/store/games?hl=en"; // Universal link for iOS
-  const playStoreLink = "https://play.google.com/store/games?hl=en"; // Android Play Store URL
-  const appStoreLink = "https://play.google.com/store/games?hl=en"; // iOS App Store URL
+  const playStoreLink = "https://www.apple.com/in/app-store/"; // Android Play Store URL
+  const appStoreLink = "https://www.apple.com/in/app-store/"; // iOS App Store URL
 
   // Function to attempt to open the app or redirect to the store
   const openAppOrRedirect = () => {
