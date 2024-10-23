@@ -21,13 +21,11 @@ const AppLinkHandler = () => {
         window.location.href = appStoreLink;
       }, 10000); // Adjust the delay if necessary
     } else if (isAndroid()) {
-      alert("Android:::" + androidAppLink);
       // Attempt to open the app using a custom URL scheme (Android)
       window.location.href = androidAppLink;
 
       // If the app is not installed, redirect to the Play Store after a delay
       setTimeout(() => {
-        alert("Play Store Link:::" + playStoreLink);
         window.location.href = playStoreLink;
       }, 10000); // Adjust the delay if necessary
     } else {
