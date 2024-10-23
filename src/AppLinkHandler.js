@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 const AppLinkHandler = () => {
   // URLs for your app links and app store links
-  const androidAppLink = "https://go-deep-link-poc-vercel.app/"; // Custom scheme for Android app
+  const androidAppLink = "goapp"; // Custom scheme for Android app
   const iOSAppLink = "https://play.google.com/store/games?hl=en"; // Universal link for iOS
   const playStoreLink = "https://www.apple.com/in/app-store/"; // Android Play Store URL
   const appStoreLink = "https://www.apple.com/in/app-store/"; // iOS App Store URL
