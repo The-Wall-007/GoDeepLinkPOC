@@ -19,7 +19,7 @@ const AppLinkHandler = () => {
       // If the app is not installed, redirect to the App Store after a delay
       setTimeout(() => {
         window.location.href = appStoreLink;
-      }, 1500); // Adjust the delay if necessary
+      }, 10000); // Adjust the delay if necessary
     } else if (isAndroid()) {
       alert("Android:::" + androidAppLink);
       // Attempt to open the app using a custom URL scheme (Android)
@@ -29,7 +29,7 @@ const AppLinkHandler = () => {
       setTimeout(() => {
         alert("Play Store Link:::" + playStoreLink);
         window.location.href = playStoreLink;
-      }, 1500); // Adjust the delay if necessary
+      }, 10000); // Adjust the delay if necessary
     } else {
       console.log("Unsupported platform");
     }
