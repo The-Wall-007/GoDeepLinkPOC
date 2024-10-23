@@ -11,36 +11,25 @@ const AppLinkHandler = () => {
   const openAppOrRedirect = () => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    // Create a hidden iframe to try to open the app
-    const openAppInIframe = (appLink) => {
-      const iframe = document.createElement("iframe");
-      iframe.style.display = "none";
-      iframe.src = appLink;
-      document.body.appendChild(iframe);
-
-      // Remove the iframe after some time
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 1000);
-    };
-
-    // Detect iOS
+    // Check if user is on an iOS device
     if (isIOS()) {
-      // Attempt to open the app using the custom scheme
-      openAppInIframe(iOSAppLink);
+      // Attempt to open the app using Universal Link (iOS)
+      window.location.href = iOSAppLink;
 
-      // Redirect to App Store if app isn't installed
+      // If the app is not installed, redirect to the App Store after a delay
       setTimeout(() => {
         window.location.href = appStoreLink;
       }, 1500); // Adjust the delay if necessary
     } else if (isAndroid()) {
-      // Attempt to open the app using the custom scheme
-      openAppInIframe(androidAppLink);
+      alert("Android:::" + androidAppLink);
+      // Attempt to open the app using a custom URL scheme (Android)
+      window.location.href = androidAppLink;
 
-      // Redirect to Play Store if app isn't installed
+      // If the app is not installed, redirect to the Play Store after a delay
       setTimeout(() => {
+        alert("Play Store Link:::" + playStoreLink);
         window.location.href = playStoreLink;
-      }, 15000); // Adjust the delay if necessary
+      }, 1500); // Adjust the delay if necessary
     } else {
       console.log("Unsupported platform");
     }
