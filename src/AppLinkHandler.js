@@ -4,7 +4,8 @@ const AppLinkHandler = () => {
   // URLs for your app links and app store links
   const androidAppLink = "goapp://"; // Custom scheme for Android app
   const iOSAppLink = "https://www.apple.com/in/app-store/"; // Universal link for iOS
-  const playStoreLink = "https://play.google.com/store/games?hl=en"; // Android Play Store URL
+  const playStoreLink =
+    "https://expo.dev/accounts/go_rentals/projects/goapp/builds/e07ca35a-aa09-492a-8bd1-a415092424aa"; // Android Play Store URL
   const appStoreLink = "https://www.apple.com/in/app-store/"; // iOS App Store URL
 
   // Function to attempt to open the app or redirect to the store
