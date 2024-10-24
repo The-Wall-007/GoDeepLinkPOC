@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 
-const AppLinkHandler = () => {
+const AppLinkHandler = ({ param1, param2 }) => {
   // URLs for your app links and app store links
-  const androidAppLink = "goapp://Home?param1=1234&param2=4321"; // Custom scheme for Android app
+  const androidAppLink = `goapp://Home?name=${encodeURIComponent(
+    param1
+  )}&mobile=${encodeURIComponent(param2)}`; // Custom scheme for Android app
   const iOSAppLink = "https://www.apple.com/in/app-store/"; // Universal link for iOS
   const playStoreLink =
     "https://expo.dev/accounts/go_rentals/projects/goapp/builds/e07ca35a-aa09-492a-8bd1-a415092424aa"; // Android Play Store URL
@@ -12,7 +14,6 @@ const AppLinkHandler = () => {
   const openAppOrRedirect = () => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    // Check if user is on an iOS device
     if (isIOS()) {
       // Attempt to open the app using Universal Link (iOS)
       window.location.href = iOSAppLink;
@@ -37,7 +38,7 @@ const AppLinkHandler = () => {
   // Call the function when the component mounts
   useEffect(() => {
     openAppOrRedirect();
-  }, []);
+  }, [param1, param2]); // Re-run the effect when the parameters change
 
   return (
     <div>
