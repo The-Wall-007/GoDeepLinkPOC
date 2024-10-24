@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 
 const AppLinkHandler = ({ param1, param2 }) => {
   // URLs for your app links and app store links
-  const androidAppLink = `goapp://Home?name=${encodeURIComponent(
-    param1
-  )}&mobile=${encodeURIComponent(param2)}`; // Custom scheme for Android app
+  const androidAppLink = `goapp://Home?name=
+    ${param1}&mobile=${param2}`; // Custom scheme for Android app
   const iOSAppLink = "https://www.apple.com/in/app-store/"; // Universal link for iOS
   const playStoreLink =
     "https://expo.dev/accounts/go_rentals/projects/goapp/builds/e07ca35a-aa09-492a-8bd1-a415092424aa"; // Android Play Store URL
