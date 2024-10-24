@@ -10,41 +10,45 @@ const AppLinkHandler = ({ param1, param2 }) => {
 
   // Function to attempt to open the app or redirect to the store
   const openAppOrRedirect = () => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    let timeoutId;
+    let hasAppOpened = false;
 
+    // Check if app opens using a custom scheme (Android) or Universal Link (iOS)
     if (isIOS()) {
-      // Attempt to open the app using Universal Link (iOS)
       window.location.href = iOSAppLink;
-
-      // If the app is not installed, redirect to the App Store after a delay
-      setTimeout(() => {
-        window.location.href = appStoreLink;
-      }, 2000); // Adjust the delay if necessary
+      timeoutId = setTimeout(() => {
+        if (!hasAppOpened) {
+          window.location.href = appStoreLink;
+        }
+      }, 1000);
     } else if (isAndroid()) {
-      // Attempt to open the app using a custom URL scheme (Android)
+      const start = Date.now();
       window.location.href = androidAppLink;
-
-      // If the app is not installed, redirect to the Play Store after a delay
-      setTimeout(() => {
-        window.location.href = playStoreLink;
-      }, 2000); // Adjust the delay if necessary
+      timeoutId = setTimeout(() => {
+        if (Date.now() - start < 1500) {
+          hasAppOpened = true;
+        }
+        if (!hasAppOpened) {
+          window.location.href = playStoreLink;
+        }
+      }, 1500);
     } else {
       console.log("Unsupported platform");
     }
+
+    window.addEventListener("blur", () => {
+      hasAppOpened = true;
+      clearTimeout(timeoutId);
+    });
   };
 
-  // Call the function when the component mounts
   useEffect(() => {
     openAppOrRedirect();
-  }, [param1, param2]); // Re-run the effect when the parameters change
+  }, [param1, param2]);
 
   return (
-    <div>
-      <h1>Redirecting...</h1>
-      <p>
-        If the app is installed, it should open automatically. Otherwise, you'll
-        be redirected to the app store.
-      </p>
+    <div style={styles.container}>
+      <h1 style={styles.title}>Redirecting...</h1>
     </div>
   );
 };
@@ -54,3 +58,30 @@ const isAndroid = () => /Android/i.test(navigator.userAgent);
 const isIOS = () => /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 export default AppLinkHandler;
+
+// Inline styles
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    backgroundColor: "#f9f9f9",
+    fontFamily: "Arial, sans-serif",
+  },
+  title: {
+    fontSize: "2.5rem",
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: "20px",
+  },
+  text: {
+    fontSize: "1.2rem",
+    color: "#555",
+    maxWidth: "600px",
+    lineHeight: "1.6",
+    padding: "0 20px",
+    margin: "0 auto",
+  },
+};
